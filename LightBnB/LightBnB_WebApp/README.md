@@ -53,3 +53,11 @@
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+
+
+
+## Final Product
+
+!["LoginPage"](https://github.com/sonder03/tweeter/blob/master/docs/tweeter-page.png)
+!["CannotbeEmpty"](https://github.com/sonder03/tweeter/blob/master/docs/TweetCannotBeBlank.png)
+!["Cannotexceed 140 Chars"](https://github.com/sonder03/tweeter/blob/master/docs/TweetCannotExceed140Characters.png)

@@ -86,7 +86,7 @@ const getAllReservations = function (guest_id) {
   return pool
     .query(
       `
-    SELECT reservations.*, properties.title, properties.cost_per_night, AVG(property_reviews.rating) AS average_rating
+    SELECT reservations.*, properties.title, properties.cost_per_night, AVG(property_reviews.rating) AS average_rating, properties.cover_photo_url, properties.thumbnail_photo_url
     FROM reservations
     JOIN properties ON reservations.property_id = properties.id
     JOIN property_reviews ON properties.id = property_reviews.property_id
@@ -168,30 +168,21 @@ const getAllProperties = function (options, limit = 10) {
   return pool.query(queryString, queryParams).then((res) => res.rows);
 };
 
-
 /**
  * Add a property to the database
  * @param {{}} property An object containing all of the property details.
  * @return {Promise<{}>} A promise to the property.
  */
 
-
-// const addProperty = function (property) {
-//   const propertyId = Object.keys(properties).length + 1;
-//   property.id = propertyId;
-//   properties[propertyId] = property;
-//   return Promise.resolve(property);
-// };
-
-const addProperty = function(property) {
+const addProperty = function (property) {
   const queryParams = [
     property.owner_id,
     property.title,
-    property.description ,
+    property.description,
     property.thumbnail_photo_url,
     property.cover_photo_url,
-    property.cost_per_night ,
-    property.parking_spaces ,
+    property.cost_per_night,
+    property.parking_spaces,
     property.number_of_bathrooms,
     property.number_of_bedrooms,
     property.country,
@@ -199,7 +190,7 @@ const addProperty = function(property) {
     property.city,
     property.province,
     property.post_code,
-    true 
+    true,
   ];
 
   const queryString = `
@@ -226,15 +217,14 @@ const addProperty = function(property) {
     RETURNING *;
   `;
 
-  return pool.query(queryString, queryParams)
+  return pool
+    .query(queryString, queryParams)
     .then((result) => result.rows[0])
     .catch((err) => {
       console.log(err.message);
       throw err;
     });
 };
-
-
 
 module.exports = {
   getUserWithEmail,
