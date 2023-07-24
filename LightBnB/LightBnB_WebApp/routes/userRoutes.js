@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
   const user = req.body;
   user.password = bcrypt.hashSync(user.password, 12);
 user.email = req.body.email
+
   database
     .addUser(user)
     .then((user) => {
